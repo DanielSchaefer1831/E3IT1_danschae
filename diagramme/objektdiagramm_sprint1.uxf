@@ -10,4 +10,4 @@ kennzeichen = "AB-CD 123"
 grundpreis = 30.0
 verfuegbar = true</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>270</x><y>150</y><w>140</w><h>200</h></coordinates><panel_attributes>lt=-
 r1=kunde</panel_attributes><additional_attributes>10;10;120;180</additional_attributes></element><element><id>Relation</id><coordinates><x>660</x><y>150</y><w>200</w><h>200</h></coordinates><panel_attributes>lt=-
-r1=kunde</panel_attributes><additional_attributes>10;180;180;10</additional_attributes></element></diagram>
+r2=fahrzeug</panel_attributes><additional_attributes>10;180;180;10</additional_attributes></element></diagram>
