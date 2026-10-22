@@ -1,9 +1,9 @@
-public class Mietvertrag
+public class Mietvertrag 
 {
     private int vertragsnummer;
-    private Kunde kunde;        // Pfeil zu Kunde
-    private Fahrzeug fahrzeug;  // Pfeil zu Fahrzeug
-    private int mietdauer;      // Mietdauer in Tagen
+    private Kunde kunde;        //Verbindung zu Kunde
+    private Fahrzeug fahrzeug;  //Verbindung zu Fahrzeug
+    private int mietdauer;      //Mietdauer in Tagen
 
     public Mietvertrag(int vertragsnummer, Kunde kunde, Fahrzeug fahrzeug, int mietdauer)
     {
@@ -13,15 +13,22 @@ public class Mietvertrag
         this.mietdauer = mietdauer;
     }
 
-    // Preis = Grundpreis pro Tag × Anzahl Tage
+    //Preis = Grundpreis pro Tag × Anzahl Tage
     public double mietpreis()
     {
         return fahrzeug.getGrundpreis() * mietdauer;
     }
 
+    //Miete beginnt, Fahrzeug wird als vermietet gekennzeichnet
+    public void starten()
+    {
+        fahrzeug.vermieten();
+    }
+
+    //Miete endet, Fahrzeug ist wieder verfügbar
     public void beenden()
     {
-        // wird später noch umgesetzt
+        fahrzeug.zurueckgeben();
     }
 
     public int getVertragsnummer() { return vertragsnummer; }
