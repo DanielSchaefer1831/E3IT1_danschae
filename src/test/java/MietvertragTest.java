@@ -2,6 +2,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class MietvertragTest 
 {
@@ -46,5 +47,22 @@ class MietvertragTest
 
         mietvertrag.beenden();
         assertTrue(fahrzeug.istVerfuegbar());
+    }
+
+    //Eigener Test aus Sprint 2: Ein vermietetes Fahrzeug kann nicht nochmal vermietet werden
+    @Test
+    void fahrzeugKannNichtDoppeltVermietetWerden()
+    {
+        Kunde mina = new Kunde("Mina Beispiel", 123);
+        Kunde daniel = new Kunde("Daniel Schäfer", 456);
+        Fahrzeug fahrzeug = new Fahrzeug("AB-CD 123", 30.00, true);
+
+        Mietvertrag ersterVertrag = new Mietvertrag(1001, mina, fahrzeug, 3);
+        Mietvertrag zweiterVertrag = new Mietvertrag(1002, daniel, fahrzeug, 2);
+
+        ersterVertrag.starten();
+
+        assertThrows(IllegalStateException.class, () -> zweiterVertrag.starten());
+        assertFalse(fahrzeug.istVerfuegbar());
     }
 }
