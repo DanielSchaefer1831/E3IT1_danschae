@@ -1,11 +1,15 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
-class MietvertragTest
+class MietvertragTest 
 {
-    // Vorgegebener Test aus Sprint 1
+
+    //Vorgegebener Test aus Sprint 1
     @Test
-    void mietpreisBerechnen() {
+    void mietpreisBerechnen()
+    {
         Kunde kunde = new Kunde("Mina Beispiel", 123);
         Fahrzeug fahrzeug = new Fahrzeug("AB-CD 123", 30.00, true);
 
@@ -14,7 +18,7 @@ class MietvertragTest
         assertEquals(90.00, mietvertrag.mietpreis(), 0.001);
     }
 
-    // Eigener Test: eine Woche mit krummem Tagespreis
+    //Eigener Test aus Sprint 1: eine Woche mit krummem Tagespreis
     @Test
     void mietpreisFuerEineWoche()
     {
@@ -24,5 +28,23 @@ class MietvertragTest
         Mietvertrag mietvertrag = new Mietvertrag(1002, kunde, fahrzeug, 7);
 
         assertEquals(318.50, mietvertrag.mietpreis(), 0.001);
+    }
+
+    //Vorgegebener Test aus Sprint 2
+    @Test
+    void fahrzeugstatusWirdKontrolliertGeaendert()
+    {
+        Kunde kunde = new Kunde("Mina Beispiel", 123);
+        Fahrzeug fahrzeug = new Fahrzeug("AB-CD 123", 30.00, true);
+        Mietvertrag mietvertrag = new Mietvertrag(1001, kunde, fahrzeug, 3);
+
+        assertTrue(fahrzeug.istVerfuegbar());
+        assertEquals(90.00, mietvertrag.mietpreis(), 0.001);
+
+        mietvertrag.starten();
+        assertFalse(fahrzeug.istVerfuegbar());
+
+        mietvertrag.beenden();
+        assertTrue(fahrzeug.istVerfuegbar());
     }
 }

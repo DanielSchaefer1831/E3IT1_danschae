@@ -1,4 +1,4 @@
-public class Mietvertrag 
+public class Mietvertrag
 {
     private int vertragsnummer;
     private Kunde kunde;        //Verbindung zu Kunde
