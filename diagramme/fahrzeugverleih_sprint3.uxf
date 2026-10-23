@@ -1,0 +1,36 @@
+<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><element><id>UMLGeneric</id><coordinates><x>0</x><y>80</y><w>240</w><h>160</h></coordinates><panel_attributes>Kunde
+--
+- name: String
+- kundennummer: int
+--
++ getName(): String
++ getKundennummer(): int</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>300</x><y>290</y><w>280</w><h>200</h></coordinates><panel_attributes>Mietvertrag
+--
+- vertragsnummer: int
+- mietdauer: int
+--
++ mietpreis(): double
++ starten()
++ beenden()
++ getVertragsnummer(): int
++ getMietdauer(): int</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>750</x><y>50</y><w>240</w><h>180</h></coordinates><panel_attributes>Fahrzeug
+--
+- kennzeichen: String
+- tagespreis: double
+- verfuegbar: boolean
+--
++ getKennzeichen(): String
++ getTagespreis(): double
++ istVerfuegbar(): boolean
++ vermieten()
++ zurueckgeben()</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>230</x><y>150</y><w>90</w><h>240</h></coordinates><panel_attributes>lt=&lt;-
+r1=-kunde</panel_attributes><additional_attributes>10;10;70;220</additional_attributes></element><element><id>Relation</id><coordinates><x>570</x><y>120</y><w>240</w><h>270</h></coordinates><panel_attributes>lt=-&gt;
+r2=-fahrzeug</panel_attributes><additional_attributes>10;250;180;10</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>250</x><y>120</y><w>45</w><h>25</h></coordinates><panel_attributes>1</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>280</x><y>250</y><w>45</w><h>25</h></coordinates><panel_attributes>0..*</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>580</x><y>260</y><w>45</w><h>25</h></coordinates><panel_attributes>1</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>650</x><y>170</y><w>45</w><h>25</h></coordinates><panel_attributes>0..*</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>700</x><y>330</y><w>200</w><h>110</h></coordinates><panel_attributes>Fahrrad
+--
+- anzahlGaenge: int
+--
++ getAnzahlGaenge(): int</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>910</x><y>330</y><w>200</w><h>110</h></coordinates><panel_attributes>EBike
+--
+- akkukapazitaet: int
+--
++ getAkkukapazitaet(): int</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>790</x><y>220</y><w>30</w><h>130</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;110</additional_attributes></element><element><id>Relation</id><coordinates><x>950</x><y>220</y><w>30</w><h>130</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;110</additional_attributes></element></diagram>
