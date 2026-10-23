@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class MietvertragTest 
 {
-
     // Vorgegebener Test aus Sprint 1
     @Test
     void mietpreisBerechnen()
@@ -85,5 +84,24 @@ class MietvertragTest
         assertEquals(30.00, eBike.getTagespreis(), 0.001);
         assertEquals(500, eBike.getAkkukapazitaet());
         assertEquals(90.00, mietvertragEBike.mietpreis(), 0.001);
+    }
+
+    // Eigener Test aus Sprint 3: Starten und Beenden funktionieren auch beim E-Bike
+    @Test
+    void eBikeKannVermietetUndZurueckgegebenWerden()
+    {
+        Kunde kunde = new Kunde("Daniel Schäfer", 456);
+        EBike eBike = new EBike("E-200", 30.00, true, 500);
+        Mietvertrag mietvertrag = new Mietvertrag(1003, kunde, eBike, 2);
+
+        assertTrue(eBike.istVerfuegbar());
+
+        mietvertrag.starten();
+        assertFalse(eBike.istVerfuegbar());
+
+        mietvertrag.beenden();
+        assertTrue(eBike.istVerfuegbar());
+
+        assertEquals(60.00, mietvertrag.mietpreis(), 0.001);
     }
 }
