@@ -1,0 +1,22 @@
+<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><element><id>UMLGeneric</id><coordinates><x>40</x><y>80</y><w>240</w><h>160</h></coordinates><panel_attributes>_kunde: Kunde_
+--
+name = "Mina Beispiel"
+kundennummer = 123</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>390</x><y>250</y><w>280</w><h>200</h></coordinates><panel_attributes>_mietvertragFahrrad: Mietvertrag_
+--
+vertragsnummer = 1001
+mietdauer = 3</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>840</x><y>80</y><w>240</w><h>180</h></coordinates><panel_attributes>_fahrrad: Fahrrad_
+--
+kennzeichen = "F-100"
+tagespreis = 15.0
+verfuegbar = true
+anzahlGaenge = 21</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>270</x><y>150</y><w>140</w><h>200</h></coordinates><panel_attributes>lt=-
+r1=kunde</panel_attributes><additional_attributes>10;10;120;180</additional_attributes></element><element><id>Relation</id><coordinates><x>660</x><y>150</y><w>200</w><h>200</h></coordinates><panel_attributes>lt=-
+r2=fahrzeug</panel_attributes><additional_attributes>10;180;180;10</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>770</x><y>450</y><w>240</w><h>180</h></coordinates><panel_attributes>_eBike: EBike_
+--
+kennzeichen = "E-200"
+tagespreis = 30.0
+verfuegbar = true
+akkukapazitaet = 500</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>40</x><y>440</y><w>240</w><h>180</h></coordinates><panel_attributes>_mietvertragEBike: Mietvertrag_
+--
+vertragsnummer = 1002
+mietdauer = 3</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>140</x><y>230</y><w>60</w><h>230</h></coordinates><panel_attributes>r2=kunde</panel_attributes><additional_attributes>10;10;10;210</additional_attributes></element><element><id>Relation</id><coordinates><x>270</x><y>510</y><w>520</w><h>40</h></coordinates><panel_attributes>r2=fahrzeug</panel_attributes><additional_attributes>500;20;10;20</additional_attributes></element></diagram>
