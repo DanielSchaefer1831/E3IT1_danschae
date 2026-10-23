@@ -4,10 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class MietvertragTest
+class MietvertragTest 
 {
 
-    //Vorgegebener Test aus Sprint 1
+    // Vorgegebener Test aus Sprint 1
     @Test
     void mietpreisBerechnen()
     {
@@ -19,7 +19,7 @@ class MietvertragTest
         assertEquals(90.00, mietvertrag.mietpreis(), 0.001);
     }
 
-    //Eigener Test aus Sprint 1: eine Woche mit krummem Tagespreis
+    // Eigener Test aus Sprint 1: eine Woche mit krummem Tagespreis
     @Test
     void mietpreisFuerEineWoche()
     {
@@ -31,7 +31,7 @@ class MietvertragTest
         assertEquals(318.50, mietvertrag.mietpreis(), 0.001);
     }
 
-    //Vorgegebener Test aus Sprint 2
+    // Vorgegebener Test aus Sprint 2
     @Test
     void fahrzeugstatusWirdKontrolliertGeaendert()
     {
@@ -49,7 +49,7 @@ class MietvertragTest
         assertTrue(fahrzeug.istVerfuegbar());
     }
 
-    //Eigener Test aus Sprint 2: Ein vermietetes Fahrzeug kann nicht nochmal vermietet werden
+    // Eigener Test aus Sprint 2: Ein vermietetes Fahrzeug kann nicht nochmal vermietet werden
     @Test
     void fahrzeugKannNichtDoppeltVermietetWerden()
     {
@@ -64,5 +64,26 @@ class MietvertragTest
 
         assertThrows(IllegalStateException.class, () -> zweiterVertrag.starten());
         assertFalse(fahrzeug.istVerfuegbar());
+    }
+
+    // Vorgegebener Test aus Sprint 3
+    @Test
+    void unterschiedlicheFahrzeugarten()
+    {
+        Kunde kunde = new Kunde("Mina Beispiel", 123);
+
+        Fahrrad fahrrad = new Fahrrad("F-100", 15.00, true, 21);
+        EBike eBike = new EBike("E-200", 30.00, true, 500);
+
+        Mietvertrag mietvertragFahrrad = new Mietvertrag(1001, kunde, fahrrad, 3);
+        Mietvertrag mietvertragEBike = new Mietvertrag(1002, kunde, eBike, 3);
+
+        assertEquals(15.00, fahrrad.getTagespreis(), 0.001);
+        assertEquals(21, fahrrad.getAnzahlGaenge());
+        assertEquals(45.00, mietvertragFahrrad.mietpreis(), 0.001);
+
+        assertEquals(30.00, eBike.getTagespreis(), 0.001);
+        assertEquals(500, eBike.getAkkukapazitaet());
+        assertEquals(90.00, mietvertragEBike.mietpreis(), 0.001);
     }
 }

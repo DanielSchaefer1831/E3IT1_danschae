@@ -1,4 +1,4 @@
-public class EBike extends Fahrzeug 
+public class EBike extends Fahrzeug
 {
     private int akkukapazitaet;   // in Wattstunden (Wh)
 
