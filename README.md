@@ -4,7 +4,7 @@ Schulprojekt (E3IT1, Projektkompetenz bei Herrn Frank):
 Objektorientierte Konsolenanwendung in Java für einen Fahrzeugverleih.
 
 ## Aufbau
-- `src/main/java/`: Klassen Kunde, Fahrzeug und Mietvertrag
+- `src/main/java/`: Klassen Kunde, Fahrzeug, Fahrrad, EBike und Mietvertrag
 - `src/test/java/`: JUnit-Tests
 - `diagramme/`: Klassen- und Objektdiagramme (UMLet, .uxf und .png)
 - `screenshots/`: Screenshots der Testausführung
@@ -45,6 +45,25 @@ oder im Terminal: `mvn test`
 - Das Objektdiagramm zeigt den Zustand direkt nach `mietvertrag.starten()`,
   weil dort die Statusänderung sichtbar wird (`verfuegbar = false`).
 
+### Sprint 3
+- `Fahrzeug` ist jetzt die **Oberklasse** mit den gemeinsamen Eigenschaften
+  (Kennzeichen, Tagespreis, Verfügbarkeit) und den Methoden aus Sprint 2.
+- `Fahrrad` und `EBike` sind **Unterklassen** (`extends Fahrzeug`). Sie enthalten
+  nur ihre eigenen Attribute (`anzahlGaenge` bzw. `akkukapazitaet`) und rufen
+  im Konstruktor mit `super(...)` den Konstruktor von `Fahrzeug` auf.
+- Die Klasse heißt `EBike` statt `E_Bike`, weil Klassennamen in Java
+  nach Konvention ohne Unterstrich geschrieben werden (CamelCase).
+- `grundpreis` wurde in `tagespreis` umbenannt (inkl. `getTagespreis()`),
+  passend zur Anforderung und zum vorgegebenen Test.
+- `Fahrzeug` ist **nicht abstrakt**, damit die Tests aus Sprint 1 und 2 mit
+  `new Fahrzeug(...)` weiterhin unverändert funktionieren.
+- Am `Mietvertrag` musste nichts geändert werden: Er arbeitet mit einem
+  `Fahrzeug`, und Fahrrad und E-Bike *sind* Fahrzeuge.
+- Die Akkukapazität wird als ganze Zahl in Wattstunden (Wh) gespeichert.
+- Im Objektdiagramm stehen bei Fahrrad und E-Bike auch die geerbten Werte,
+  weil die konkreten Objekte diese Werte besitzen. Beide Verbindungen vom
+  Mietvertrag zum Rad heißen `fahrzeug`, weil das Attribut im Mietvertrag so heißt.
+
 ## Probleme und Lösungen
 - Der Projektordner auf dem Desktop wurde in IntelliJ nicht angezeigt.
   Lösung: Pfad im Explorer kopiert und in IntelliJ eingefügt.
@@ -57,6 +76,11 @@ oder im Terminal: `mvn test`
   beschriftet (`kunde` statt `fahrzeug`). Lösung: korrigiert und neu committet.
 - Sprint 2: Das Issue „Sprint 2“ wurde zuerst ohne Unteraufgaben angelegt.
   Lösung: Die Aufgaben nachträglich als Sub-Issues ergänzt.
+- Sprint 3: Die Aufgaben wurden als einzelne Issues statt als Sub-Issues angelegt.
+  Lösung: Über „Add existing issue“ nachträglich unter „Sprint 3“ gehängt.
+- Sprint 3: Nach dem Umbenennen von `getGrundpreis()` war `Mietvertrag` fehlerhaft.
+  Lösung: Aufruf in `mietpreis()` auf `getTagespreis()` angepasst und mit den
+  alten Tests geprüft, dass alles weiter funktioniert.
 
 ## Testergebnisse Sprint 1
 
@@ -78,6 +102,16 @@ Eigener Test (ein vermietetes Fahrzeug kann nicht nochmal vermietet werden):
 
 ![Eigener Test Sprint 2](screenshots/sprint2_test_eigener.png)
 
+## Testergebnisse Sprint 3
+
+Vorgegebener Test (Fahrrad 15,00 € × 3 = 45,00 €, E-Bike 30,00 € × 3 = 90,00 €):
+
+![Vorgegebener Test Sprint 3](screenshots/sprint3_test_vorgegeben.png)
+
+Eigener Test (E-Bike kann vermietet und zurückgegeben werden, 30,00 € × 2 = 60,00 €):
+
+![Eigener Test Sprint 3](screenshots/sprint3_test_eigener.png)
+
 ## Diagramme Sprint 1
 
 ![Klassendiagramm Sprint 1](diagramme/fahrzeugverleih_sprint1.png)
@@ -86,10 +120,16 @@ Eigener Test (ein vermietetes Fahrzeug kann nicht nochmal vermietet werden):
 
 ## Diagramme Sprint 2
 
-Klassendiagramm:
-
 ![Klassendiagramm Sprint 2](diagramme/fahrzeugverleih_sprint2.png)
 
-Objektdiagramm (Zustand nach `mietvertrag.starten()`):
-
 ![Objektdiagramm Sprint 2](diagramme/objektdiagramm_sprint2.png)
+
+## Diagramme Sprint 3
+
+Klassendiagramm mit Vererbung:
+
+![Klassendiagramm Sprint 3](diagramme/fahrzeugverleih_sprint3.png)
+
+Objektdiagramm zum vorgegebenen Test:
+
+![Objektdiagramm Sprint 3](diagramme/objektdiagramm_sprint3.png)
