@@ -16,7 +16,7 @@ public class Mietvertrag
     //Preis = Grundpreis pro Tag × Anzahl Tage
     public double mietpreis()
     {
-        return fahrzeug.getGrundpreis() * mietdauer;
+        return fahrzeug.getTagespreis() * mietdauer;
     }
 
     //Miete beginnt, Fahrzeug wird als vermietet gekennzeichnet
