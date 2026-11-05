@@ -18,7 +18,7 @@
 + getVertragsnummer(): int
 + getMietdauer(): int
 + getKunde(): Kunde
-+ getFahrzeuge(): List&lt;Fahrzeug&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>750</x><y>50</y><w>240</w><h>180</h></coordinates><panel_attributes>/Fahrzeug/
++ getFahrzeuge(): List&lt;Fahrzeug&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>750</x><y>40</y><w>240</w><h>180</h></coordinates><panel_attributes>/Fahrzeug/
 --
 - kennzeichen: String
 - tagespreis: double
@@ -31,18 +31,18 @@
 + istVerfuegbar(): boolean
 + vermieten()
 + zurueckgeben()</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>250</x><y>150</y><w>70</w><h>240</h></coordinates><panel_attributes>lt=&lt;-
-r1=-kunde</panel_attributes><additional_attributes>10;10;50;220</additional_attributes></element><element><id>Relation</id><coordinates><x>570</x><y>120</y><w>240</w><h>270</h></coordinates><panel_attributes>lt=-&gt;
-r2=-fahrzeug</panel_attributes><additional_attributes>10;250;180;10</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>270</x><y>120</y><w>45</w><h>25</h></coordinates><panel_attributes>1..*</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>280</x><y>250</y><w>45</w><h>25</h></coordinates><panel_attributes>0..*</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>580</x><y>260</y><w>45</w><h>25</h></coordinates><panel_attributes>0..*</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>650</x><y>170</y><w>45</w><h>25</h></coordinates><panel_attributes>1..*</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>700</x><y>330</y><w>200</w><h>110</h></coordinates><panel_attributes>Fahrrad
+r1=-kunde</panel_attributes><additional_attributes>10;10;50;220</additional_attributes></element><element><id>Relation</id><coordinates><x>570</x><y>110</y><w>250</w><h>280</h></coordinates><panel_attributes>lt=-&gt;
+r2=-fahrzeuge</panel_attributes><additional_attributes>10;260;180;10</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>270</x><y>120</y><w>45</w><h>25</h></coordinates><panel_attributes>1</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>280</x><y>250</y><w>45</w><h>25</h></coordinates><panel_attributes>0..*</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>580</x><y>260</y><w>45</w><h>25</h></coordinates><panel_attributes>0..*</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>650</x><y>170</y><w>45</w><h>25</h></coordinates><panel_attributes>1..*</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>290</x><y>530</y><w>530</w><h>110</h></coordinates><panel_attributes>Fahrrad
 --
 - anzahlGaenge: int
 --
 + Fahrrad(kennzeichen: String, tagespreis: double, verfuegbar: boolean, anzahlGaenge: int)
 + mietpreis(mietdauer: int): double
-+ getAnzahlGaenge(): int</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>910</x><y>330</y><w>200</w><h>110</h></coordinates><panel_attributes>EBike
++ getAnzahlGaenge(): int</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>590</x><y>400</y><w>510</w><h>110</h></coordinates><panel_attributes>EBike
 --
 - akkukapazitaet: int
 _- AKKU_SERVICEPAUSCHALE: double = 5.0_
 --
 + EBike(kennzeichen: String, tagespreis: double, verfuegbar: boolean, akkukapazitaet: int)
 + mietpreis(mietdauer: int): double
-+ getAkkukapazitaet(): int</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>790</x><y>220</y><w>30</w><h>130</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;110</additional_attributes></element><element><id>Relation</id><coordinates><x>950</x><y>220</y><w>30</w><h>130</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;110</additional_attributes></element></diagram>
++ getAkkukapazitaet(): int</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>380</x><y>210</y><w>440</w><h>340</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>420;10;10;320</additional_attributes></element><element><id>Relation</id><coordinates><x>630</x><y>210</y><w>350</w><h>210</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>330;10;10;190</additional_attributes></element></diagram>
