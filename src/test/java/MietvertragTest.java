@@ -7,15 +7,16 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class MietvertragTest
 {
     // Vorgegebener Test aus Sprint 1
+    // Sprint 4: Fahrrad statt Fahrzeug (Fahrzeug ist abstrakt), gesamtpreis() statt mietpreis()
     @Test
     void mietpreisBerechnen()
     {
         Kunde kunde = new Kunde("Mina Beispiel", 123);
-        Fahrzeug fahrzeug = new Fahrzeug("AB-CD 123", 30.00, true);
+        Fahrrad fahrrad = new Fahrrad("AB-CD 123", 30.00, true, 21);
 
-        Mietvertrag mietvertrag = new Mietvertrag(1001, kunde, fahrzeug, 3);
+        Mietvertrag mietvertrag = new Mietvertrag(1001, kunde, fahrrad, 3);
 
-        assertEquals(90.00, mietvertrag.mietpreis(), 0.001);
+        assertEquals(90.00, mietvertrag.gesamtpreis(), 0.001);
     }
 
     // Eigener Test aus Sprint 1: eine Woche mit krummem Tagespreis
@@ -23,11 +24,11 @@ class MietvertragTest
     void mietpreisFuerEineWoche()
     {
         Kunde kunde = new Kunde("Daniel Schäfer", 456);
-        Fahrzeug fahrzeug = new Fahrzeug("SHA-DS 2026", 45.50, true);
+        Fahrrad fahrrad = new Fahrrad("SHA-DS 2026", 45.50, true, 21);
 
-        Mietvertrag mietvertrag = new Mietvertrag(1002, kunde, fahrzeug, 7);
+        Mietvertrag mietvertrag = new Mietvertrag(1002, kunde, fahrrad, 7);
 
-        assertEquals(318.50, mietvertrag.mietpreis(), 0.001);
+        assertEquals(318.50, mietvertrag.gesamtpreis(), 0.001);
     }
 
     // Vorgegebener Test aus Sprint 2
@@ -35,17 +36,17 @@ class MietvertragTest
     void fahrzeugstatusWirdKontrolliertGeaendert()
     {
         Kunde kunde = new Kunde("Mina Beispiel", 123);
-        Fahrzeug fahrzeug = new Fahrzeug("AB-CD 123", 30.00, true);
-        Mietvertrag mietvertrag = new Mietvertrag(1001, kunde, fahrzeug, 3);
+        Fahrrad fahrrad = new Fahrrad("AB-CD 123", 30.00, true, 21);
+        Mietvertrag mietvertrag = new Mietvertrag(1001, kunde, fahrrad, 3);
 
-        assertTrue(fahrzeug.istVerfuegbar());
-        assertEquals(90.00, mietvertrag.mietpreis(), 0.001);
+        assertTrue(fahrrad.istVerfuegbar());
+        assertEquals(90.00, mietvertrag.gesamtpreis(), 0.001);
 
         mietvertrag.starten();
-        assertFalse(fahrzeug.istVerfuegbar());
+        assertFalse(fahrrad.istVerfuegbar());
 
         mietvertrag.beenden();
-        assertTrue(fahrzeug.istVerfuegbar());
+        assertTrue(fahrrad.istVerfuegbar());
     }
 
     // Eigener Test aus Sprint 2: Ein vermietetes Fahrzeug kann nicht nochmal vermietet werden
@@ -54,18 +55,19 @@ class MietvertragTest
     {
         Kunde mina = new Kunde("Mina Beispiel", 123);
         Kunde daniel = new Kunde("Daniel Schäfer", 456);
-        Fahrzeug fahrzeug = new Fahrzeug("AB-CD 123", 30.00, true);
+        Fahrrad fahrrad = new Fahrrad("AB-CD 123", 30.00, true, 21);
 
-        Mietvertrag ersterVertrag = new Mietvertrag(1001, mina, fahrzeug, 3);
-        Mietvertrag zweiterVertrag = new Mietvertrag(1002, daniel, fahrzeug, 2);
+        Mietvertrag ersterVertrag = new Mietvertrag(1001, mina, fahrrad, 3);
+        Mietvertrag zweiterVertrag = new Mietvertrag(1002, daniel, fahrrad, 2);
 
         ersterVertrag.starten();
 
         assertThrows(IllegalStateException.class, () -> zweiterVertrag.starten());
-        assertFalse(fahrzeug.istVerfuegbar());
+        assertFalse(fahrrad.istVerfuegbar());
     }
 
     // Vorgegebener Test aus Sprint 3
+    // Sprint 4: E-Bike kostet jetzt 5 € Akku-Servicepauschale pro Tag mehr → 105 € statt 90 €
     @Test
     void unterschiedlicheFahrzeugarten()
     {
@@ -79,14 +81,15 @@ class MietvertragTest
 
         assertEquals(15.00, fahrrad.getTagespreis(), 0.001);
         assertEquals(21, fahrrad.getAnzahlGaenge());
-        assertEquals(45.00, mietvertragFahrrad.mietpreis(), 0.001);
+        assertEquals(45.00, mietvertragFahrrad.gesamtpreis(), 0.001);
 
         assertEquals(30.00, eBike.getTagespreis(), 0.001);
         assertEquals(500, eBike.getAkkukapazitaet());
-        assertEquals(90.00, mietvertragEBike.mietpreis(), 0.001);
+        assertEquals(105.00, mietvertragEBike.gesamtpreis(), 0.001);
     }
 
     // Eigener Test aus Sprint 3: Starten und Beenden funktionieren auch beim E-Bike
+    // Sprint 4: (30 € + 5 €) × 2 Tage = 70 € statt 60 €
     @Test
     void eBikeKannVermietetUndZurueckgegebenWerden()
     {
@@ -102,6 +105,6 @@ class MietvertragTest
         mietvertrag.beenden();
         assertTrue(eBike.istVerfuegbar());
 
-        assertEquals(60.00, mietvertrag.mietpreis(), 0.001);
+        assertEquals(70.00, mietvertrag.gesamtpreis(), 0.001);
     }
 }
