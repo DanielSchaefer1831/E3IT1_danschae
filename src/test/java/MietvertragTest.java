@@ -107,4 +107,19 @@ class MietvertragTest
 
         assertEquals(70.00, mietvertrag.gesamtpreis(), 0.001);
     }
+
+    // Vorgegebener Test aus Sprint 4: Fahrzeuge berechnen ihren Mietpreis unterschiedlich
+    @Test
+    void fahrzeugeBerechnenUnterschiedlicheMietpreise()
+    {
+        Kunde kunde = new Kunde("Mina Beispiel", 123);
+
+        Fahrrad fahrrad = new Fahrrad("F-100", 15.00, true, 21);
+        EBike eBike = new EBike("E-200", 30.00, true, 500);
+
+        Mietvertrag mietvertrag = new Mietvertrag(1001, kunde, fahrrad, 3);
+        mietvertrag.hinzufuegenFahrzeug(eBike);
+
+        assertEquals(150.00, mietvertrag.gesamtpreis(), 0.001);
+    }
 }
