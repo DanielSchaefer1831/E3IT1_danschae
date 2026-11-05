@@ -122,4 +122,26 @@ class MietvertragTest
 
         assertEquals(150.00, mietvertrag.gesamtpreis(), 0.001);
     }
+
+    // Eigener Test Sprint 4: Ist ein Fahrzeug schon vermietet, wird kein Fahrzeug des Vertrags vermietet
+    @Test
+    void vertragMitVermietetemFahrzeugStartetNicht()
+    {
+        Kunde mina = new Kunde("Mina Beispiel", 123);
+        Kunde daniel = new Kunde("Daniel Schäfer", 456);
+
+        Fahrrad fahrrad = new Fahrrad("F-100", 15.00, true, 21);
+        EBike eBike = new EBike("E-200", 30.00, true, 500);
+
+        Mietvertrag vertragMina = new Mietvertrag(1001, mina, fahrrad, 1);
+        vertragMina.starten();
+
+        Mietvertrag vertragDaniel = new Mietvertrag(1002, daniel, eBike, 2);
+        vertragDaniel.hinzufuegenFahrzeug(fahrrad);
+
+        assertThrows(IllegalStateException.class, () -> vertragDaniel.starten());
+        assertTrue(eBike.istVerfuegbar());
+        assertEquals(2, vertragDaniel.getFahrzeuge().size());
+        assertEquals(100.00, vertragDaniel.gesamtpreis(), 0.001);
+    }
 }
