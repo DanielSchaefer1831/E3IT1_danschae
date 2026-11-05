@@ -8,5 +8,12 @@ public class Fahrrad extends Fahrzeug
         this.anzahlGaenge = anzahlGaenge;
     }
 
+    // Fahrrad: Tagespreis × Mietdauer
+    @Override
+    public double mietpreis(int mietdauer)
+    {
+        return getTagespreis() * mietdauer;
+    }
+
     public int getAnzahlGaenge() { return anzahlGaenge; }
 }

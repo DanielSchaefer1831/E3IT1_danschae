@@ -1,17 +1,19 @@
-public class Fahrzeug
+public abstract class Fahrzeug
 {
     private String kennzeichen;
-    private double tagespreis;   // umbenannt (vorher grundpreis)
+    private double tagespreis;
     private boolean verfuegbar;
 
-    public Fahrzeug(String kennzeichen, double tagespreis, boolean verfuegbar)
+    protected Fahrzeug(String kennzeichen, double tagespreis, boolean verfuegbar)
     {
         this.kennzeichen = kennzeichen;
         this.tagespreis = tagespreis;
         this.verfuegbar = verfuegbar;
     }
 
-    // Fahrzeug als vermietet kennzeichnen
+    // Jede Fahrzeugart muss selbst festlegen, wie sie ihren Preis berechnet
+    public abstract double mietpreis(int mietdauer);
+
     public void vermieten()
     {
         if (!verfuegbar)
@@ -21,13 +23,12 @@ public class Fahrzeug
         verfuegbar = false;
     }
 
-    // Fahrzeug wieder als verfügbar kennzeichnen
     public void zurueckgeben()
     {
         verfuegbar = true;
     }
 
     public String getKennzeichen() { return kennzeichen; }
-    public double getTagespreis() { return tagespreis; }   // umbenannt (vorher getGrundpreis)
+    public double getTagespreis() { return tagespreis; }
     public boolean istVerfuegbar() { return verfuegbar; }
 }
