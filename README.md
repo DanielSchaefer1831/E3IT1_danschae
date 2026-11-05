@@ -133,3 +133,81 @@ Klassendiagramm mit Vererbung:
 Objektdiagramm zum vorgegebenen Test:
 
 ![Objektdiagramm Sprint 3](diagramme/objektdiagramm_sprint3.png)
+
+## Sprint 4
+
+### Feedback von Herrn Frank umgesetzt
+- Laut Klassendiagramm kann ein Mietvertrag mehrere Fahrzeuge enthalten.
+  Bisher gab es nur ein Attribut `fahrzeug`. Jetzt speichert der Mietvertrag
+  seine Fahrzeuge in einer Liste `List<Fahrzeug> fahrzeuge` (`ArrayList`).
+  Eine Liste statt eines Arrays, weil die Anzahl der Fahrzeuge vorher nicht feststeht.
+- Im Klassendiagramm von Sprint 4 sind bei allen Klassen die **Konstruktoren**
+  ergänzt (die Diagramme von Sprint 1 bis 3 bleiben wie abgegeben).
+- Im GitHub-Board wurde allen Issues von Sprint 1 bis 4 die passende
+  **Iteration** zugeordnet. Sprint 0 (Vorbereitung) hat keine Iteration.
+
+### Entscheidungen
+- `Fahrzeug` ist jetzt **abstrakt**. Es gibt nur noch konkrete Fahrzeugarten
+  (`Fahrrad`, `EBike`). Der Konstruktor von `Fahrzeug` ist `protected`,
+  weil ihn nur noch die Unterklassen mit `super(...)` aufrufen.
+  (Damit ist die Entscheidung aus Sprint 3, Fahrzeug nicht abstrakt zu machen, geändert.)
+- `Fahrzeug` legt die abstrakte Methode `mietpreis(int mietdauer)` fest.
+  Jede Unterklasse berechnet ihren Preis selbst (`@Override`):
+  - `Fahrrad`: Tagespreis × Mietdauer
+  - `EBike`: (Tagespreis + 5 € Akku-Servicepauschale) × Mietdauer.
+    Die 5 € sind eine Konstante (`static final`), weil sie für alle E-Bikes gleich sind.
+- **Polymorphie:** `gesamtpreis()` im Mietvertrag ruft für jedes Fahrzeug der Liste
+  dieselbe Methode `mietpreis(mietdauer)` auf, ohne zu wissen, welche Fahrzeugart
+  es ist. `gesamtpreis()` ersetzt die bisherige Methode `mietpreis()` des Mietvertrags.
+- Neue Methode `hinzufuegenFahrzeug(Fahrzeug)`. Der Konstruktor bekommt weiterhin
+  ein erstes Fahrzeug, deshalb hat ein Vertrag immer mindestens ein Fahrzeug (`1..*`).
+- `starten()` prüft zuerst, ob **alle** Fahrzeuge verfügbar sind, und vermietet
+  erst dann alle. So wird entweder alles oder nichts vermietet.
+- `getFahrzeuge()` gibt eine nicht veränderbare Kopie der Liste zurück
+  (`List.copyOf`), damit Fahrzeuge nur über `hinzufuegenFahrzeug()` in den
+  Vertrag kommen (Kapselung).
+- Im Klassendiagramm sind Klasse und Methode `mietpreis` von `Fahrzeug` kursiv
+  (abstrakt), die Konstante ist unterstrichen (statisch). Ein Mietvertrag hat
+  `1..*` Fahrzeuge, ein Fahrzeug kann in `0..*` Mietverträgen vorkommen.
+- **Bisherige Tests angepasst:**
+  - `new Fahrzeug(...)` geht nicht mehr, weil `Fahrzeug` abstrakt ist.
+    Dort wird jetzt ein `Fahrrad` verwendet, das genauso rechnet,
+    deshalb bleiben die erwarteten Preise gleich.
+  - `mietpreis()` wurde in den Tests durch `gesamtpreis()` ersetzt.
+  - Wegen der neuen E-Bike-Regel ändern sich zwei erwartete Preise:
+    3 Tage 90 € → 105 €, 2 Tage 60 € → 70 €.
+- Im Objektdiagramm sind beide Räder mit **einem** Mietvertrag verbunden.
+  Beide Verbindungen heißen `fahrzeuge`, weil beide in derselben Liste liegen.
+
+### Probleme und Lösungen
+- Nachdem `Fahrzeug` abstrakt wurde, waren die alten Tests mit `new Fahrzeug(...)` rot.
+  Das war erwartet. Lösung: Tests nach dem Umbau des Mietvertrags angepasst,
+  danach waren alle wieder grün.
+- Im Klassendiagramm wurde beim Ändern der Multiplizitäten versehentlich auch die
+  Zahl beim Kunden auf `1..*` gesetzt. Lösung: wieder auf `1` korrigiert.
+- Im Objektdiagramm wurden die Linien als Text `lt=- r2=fahrzeuge` angezeigt,
+  weil beim Einfügen Leerzeichen am Zeilenanfang mitkopiert wurden.
+  Lösung: Text ohne Leerzeichen neu eingegeben.
+- Der Commit „Alte Tests angepasst und vorgegebenen Test Sprint 4 umgesetzt“
+  enthielt nur die angepassten Tests. Der vorgegebene Test folgte im nächsten Commit.
+
+### Testergebnisse Sprint 4
+
+Vorgegebener Test (Fahrrad 15 € × 3 = 45 € + E-Bike (30 € + 5 €) × 3 = 105 € → 150 €):
+
+![Vorgegebener Test Sprint 4](screenshots/sprint4_test_vorgegeben.png)
+
+Eigener Test (ist ein Fahrzeug schon vermietet, startet der Vertrag nicht und das
+E-Bike bleibt frei; Gesamtpreis 70 € + 30 € = 100 €):
+
+![Eigener Test Sprint 4](screenshots/sprint4_test_eigener.png)
+
+### Diagramme Sprint 4
+
+Klassendiagramm (Fahrzeug abstrakt, Liste, Konstruktoren):
+
+![Klassendiagramm Sprint 4](diagramme/fahrzeugverleih_sprint4.png)
+
+Objektdiagramm zum vorgegebenen Test (ein Vertrag mit Fahrrad und E-Bike):
+
+![Objektdiagramm Sprint 4](diagramme/objektdiagramm_sprint4.png)
